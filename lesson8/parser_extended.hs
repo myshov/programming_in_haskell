@@ -11,14 +11,21 @@ expr = do t <- term
            +++ return t
 
 term :: Parser Int
-term = do f <- factor
+term = do fe <- factorExp
           do symbol "*"
              t <- term
-             return (f * t)
+             return (fe * t)
            +++ do symbol "/"
                   t <- term
-                  return (f `div` t)
-           +++ return f
+                  return (fe `div` t)
+           +++ return fe
+
+factorExp :: Parser Int
+factorExp = do f <- factor
+               do symbol "^"
+                  fe <- factorExp
+                  return (f ^ fe)
+                +++ return f
 
 factor :: Parser Int
 factor = do symbol "("
