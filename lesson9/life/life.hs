@@ -11,6 +11,9 @@ height = 20
 glider :: Board
 glider = [(4, 2), (2, 3), (4, 3), (3, 4), (4, 4)]
 
+spread :: Board
+spread = [(4, 2), (5, 3), (2, 3), (4, 3), (3, 4), (4, 4)]
+
 showcells :: Board -> IO ()
 showcells b = seqn [writeAt p "O" | p <- b]
 
